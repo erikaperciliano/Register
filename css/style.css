@@ -112,7 +112,7 @@ ul {
     border: none;
 }
 
-.details h3, .cod {
+.details h3 {
     color:#aaa;
     font-size: 16px;
     line-height: 24px;
@@ -131,9 +131,6 @@ ul {
     letter-spacing: 0.7px;
 }
 
-.cod {
-    margin-right: 18px;
-}
 
 .age {
     margin-right: 18px;
@@ -159,4 +156,18 @@ ul {
 
 #txtBirth{
     color:#000;
+}
+
+/*=== ALERT=== */
+
+/*.mt-4, .my-4 {
+    margin-left: 140px !important;
+    width: 810px !important;
+}*/
+
+#listActividades {
+    width: 800px;
+    margin: 45px auto;
+    display: grid;
+    grid-template-columns: 1fr;
 }
