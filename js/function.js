@@ -35,29 +35,31 @@ const lerLocalStorage = () =>{
     }else{
         //em cada elemento que estiver dentro do array, será printado este cód abaixo
         arrayAtividades.forEach(element =>{
-            listActividades.innerHTML += ` <div class="alert alert-danger" role="alert">
-            <i class="material-icons" float-left mr-3>
-                accessibility
-            </i>
-            <b>Nome: ${element.nome} | Idade: ${element.idade} |  Dt Nascimento: ${element.dataNascimento}</b> | Estado: ${element.estado}
-            <span class="float-rigth">
-                <i class="material-icons">
-                    done
-                </i>
-                <i class="material-icons">
-                    delete
-                </i>
-            </span>
-        </div>`
+            listActividades.innerHTML += ` <div class="alert alert-danger"
+            role="alert"><i class="material-icons" float-left mr-3>accessibility</i><b>
+            Nome:${element.nome} | Idade: ${element.idade} |  Dt Nascimento: ${element.dataNascimento}</b> | Estado: ${element.estado}<span class="float-rigth"><i class="material-icons">done</i>
+            <i class="material-icons">delete</i></span></div>`
         })
     }
 }
 
 const DeletarCadastro = (nome, idade, dataNascimento) =>{
-    //console.log(nome, idade, dataNascimento);
+  // console.log(`${nome}  ${idade}  ${dataNascimento} Deletado!`);
+
+    let indexArray;
     arrayAtividades.forEach((elemento, index) => {
-        console.log(index);
+        //verificar qual é a variável que está no lugar da var atividade
+        if(elemento.nome && elemento.idade && elemento.dataNascimento === nome, idade, dataNascimento){
+            indexArray = index;
+        }       
     })
+    arrayAtividades.splice(indexArray,1); // excluí o índice que o usuário deseja eliminar
+    GuardarInformacoes();
+}
+
+const EditarInformacoes = (nome, idade, dataNascimento) =>{
+     let indexEdit = arrayAtividades.findIndex((elemento) => elemento.nome === nome,elemento.idade === idade, elemento.dataNascimento === dataNascimento); //, elemento.idade === idade, elemento.dataNascimento === dataNascimento
+        console.log(nome);
 }
 
 
@@ -69,30 +71,30 @@ formulario.addEventListener('submit', (e) => {
     let dataNascimento = document.getElementById('txtBirth').value;
 
 
-    CriarItem(nome, idade, dataNascimento);console.log(arrayAtividades);
+    CriarItem(nome, idade, dataNascimento);
+    //console.log(arrayAtividades);
     GuardarInformacoes();
 
     formulario.reset(); //limpa o formulário após o envio das inf.
 })
 
 //é acionado quando todo o HTML for completamente carregado e analisado, sem aguardar pelo CSS
-document.addEventListener('DOMContentLoaded', lerLocalStorage)
+document.addEventListener('DOMContentLoaded', lerLocalStorage);
 
 listActividades.addEventListener('click', (e) => {
     e.preventDefault();
 
-   
-    console.log(e.target.innerHTML )
+    //console.log(e.target.innerHTML)
 
-    if(e.target.innerHTML === 'modificar' || e.target.innerHTML === 'deletar'){
+    if(e.target.innerHTML === 'done' || e.target.innerHTML === 'delete'){
+       //console.log('Feito a Esclusão!');
        let conteudo = e.path[2].childNodes[1].innerHTML;
-        if(e.target.innerHTML === 'deletar'){
-            //ação deletar
-            DeletarCadastro(conteudo); 
-        }
-        if(e.target.innerHTML === 'modificar'){
-             //ação modificar
-        }
-    }
-    
+       if(e.target.innerHTML === 'delete'){
+        //ação deletar
+        DeletarCadastro(conteudo);
+       }if(e.target.innerHTML === 'done'){
+        //ação editar
+        EditarInformacoes(conteudo);
+        }   
+    } 
 })
