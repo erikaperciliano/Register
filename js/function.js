@@ -1,4 +1,3 @@
-
 const formulario = document.getElementById('register');
 const listActividades = document.getElementById('listActividades');
 let arrayAtividades = [];
@@ -33,7 +32,6 @@ const lerLocalStorage = () =>{
     if(arrayAtividades === null){
         arrayAtividades = [];
     }else{
-        //em cada elemento que estiver dentro do array, será printado este cód abaixo
         arrayAtividades.forEach(element =>{
             listActividades.innerHTML += ` <div class="alert alert-danger"
             role="alert"><i class="material-icons" float-left mr-3>accessibility</i><b>
@@ -48,20 +46,13 @@ const DeletarCadastro = (nome, idade, dataNascimento) =>{
 
     let indexArray;
     arrayAtividades.forEach((elemento, index) => {
-        //verificar qual é a variável que está no lugar da var atividade
-        if(elemento.nome && elemento.idade && elemento.dataNascimento === nome, idade, dataNascimento){
+        if(elemento.nome === nome && elemento.idade === idade && elemento.dataNascimento === dataNascimento){
             indexArray = index;
         }       
     })
     arrayAtividades.splice(indexArray,1); // excluí o índice que o usuário deseja eliminar
     GuardarInformacoes();
 }
-
-const EditarInformacoes = (nome, idade, dataNascimento) =>{
-     let indexEdit = arrayAtividades.findIndex((elemento) => elemento.nome === nome,elemento.idade === idade, elemento.dataNascimento === dataNascimento); //, elemento.idade === idade, elemento.dataNascimento === dataNascimento
-        console.log(nome);
-}
-
 
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -94,7 +85,6 @@ listActividades.addEventListener('click', (e) => {
         DeletarCadastro(conteudo);
        }if(e.target.innerHTML === 'done'){
         //ação editar
-        EditarInformacoes(conteudo);
         }   
     } 
 })
